@@ -1,12 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/App.css" />
     <title>Word Game</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <div>
+      <h1>Word Game</h1>
+      <button id="btn-new-game">New Game</button>
+      <div id="board"></div>
+      <br><br>
+      <button id="btn-submit" class="hidden">Submit</button>
+      <h4 id="game-result"></h4>
+    </div>
+    <script src="index.js"></script>
   </body>
 </html>
