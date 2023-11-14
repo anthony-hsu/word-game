@@ -29,7 +29,6 @@ function Board() {
 
   const initializeNewGame = () => {
     setGameInProgress(true);
-    // setCurrentWord(Array(5).fill(""));
     setWords(getInitialWords());
     setCurrentStyles(getInitialStyles());
     setCurrentRound(1);
@@ -38,7 +37,6 @@ function Board() {
 
   // States
   const [words, setWords] = useState(getInitialWords());
-  // const [currentWord, setCurrentWord] = useState(Array(5).fill(""));
   const [currentRound, setCurrentRound] = useState(1);
   const [currentStyles, setCurrentStyles] = useState(getInitialStyles());
   const [gameInProgress, setGameInProgress] = useState(false);
