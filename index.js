@@ -46,9 +46,6 @@ const btnSubmit = document.getElementById("btn-submit");
 btnSubmit.addEventListener("click", handleSubmit);
 const resultText = document.getElementById("game-result");
 
-// "States"
-const roundCounter = 1;
-
 // Functions
 function handleNewGame() {
   initializeNewRow();
@@ -63,31 +60,31 @@ function initializeNewRow() {
   letter1.classList.add("letter-input");
   letter1.addEventListener("keyup", () => {
     letter2.focus();
-  })
+  });
   letter2 = document.createElement("input");
   letter2.type = "text";
   letter2.classList.add("letter-input");
   letter2.addEventListener("keyup", () => {
     letter3.focus();
-  })
+  });
   letter3 = document.createElement("input");
   letter3.type = "text";
   letter3.classList.add("letter-input");
   letter3.addEventListener("keyup", () => {
     letter4.focus();
-  })
+  });
   letter4 = document.createElement("input");
   letter4.type = "text";
   letter4.classList.add("letter-input");
   letter4.addEventListener("keyup", () => {
     letter5.focus();
-  })
+  });
   letter5 = document.createElement("input");
   letter5.type = "text";
   letter5.classList.add("letter-input");
   letter5.addEventListener("keyup", () => {
     btnSubmit.focus();
-  })
+  });
   board.appendChild(letter1);
   board.appendChild(letter2);
   board.appendChild(letter3);
