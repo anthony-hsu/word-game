@@ -42,16 +42,35 @@ function Board() {
   const [gameInProgress, setGameInProgress] = useState(false);
   const [targetWord, setTargetWord] = useState("");
 
-  const validateWord = () => {
-    return true;
+  const getValidationArray = (currentWord) => {
+    const results = currentWord.map((letter) => {
+      // Validate for:
+      // 1. blank spaces
+      // 2. alpha-only characters
+      if (
+        letter === "" ||
+        letter.charCodeAt() > "z".charCodeAt() ||
+        letter.charCodeAt() < "a".charCodeAt()
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    return results;
   };
 
   const handleSubmit = () => {
     const targetWordArr = targetWord.split("");
     const currentWord = words[currentRound - 1];
     const currentWordString = currentWord.join("");
-    if (validateWord()) {
-      const _currentStyles = currentStyles;
+    const _currentStyles = currentStyles.map((style) => {
+      return style;
+    });
+    const validationArray = getValidationArray(currentWord);
+    const isWordValid = !validationArray.includes(false);
+
+    if (isWordValid) {
       for (let i = 0; i < 5; i += 1) {
         if (targetWordArr.includes(currentWord[i])) {
           if (currentWord[i] === targetWordArr[i]) {
@@ -59,9 +78,11 @@ function Board() {
           } else {
             _currentStyles[currentRound - 1][i] = "yellow";
           }
-          setCurrentStyles(_currentStyles);
+        } else {
+          _currentStyles[currentRound - 1][i] = "lightgrey";
         }
       }
+      setCurrentStyles(_currentStyles);
 
       if (currentWordString === targetWord) {
         // Success
@@ -71,9 +92,12 @@ function Board() {
         setGameInProgress(false);
       }
       setCurrentRound(currentRound + 1);
-      console.log(_currentStyles);
     } else {
-      console.log(`Invalid guess!`);
+      for (let i = 0; i < 5; i += 1) {
+        _currentStyles[currentRound - 1][i] = validationArray[i] ? "" : "red";
+      }
+      console.log(_currentStyles);
+      setCurrentStyles(_currentStyles);
     }
   };
 
