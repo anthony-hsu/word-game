@@ -1,24 +1,25 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Letter(props) {
   // Props
-  const { value, idx, disabled, handleChange, currentStyle } = props;
+  const { value, currentStyle } = props;
 
   // States
   const [letter, setLetter] = useState(value);
 
+  useEffect(() => {
+    setLetter(value);
+  }, [value]);
+
   return (
     <>
       <input
+        readOnly
         value={letter}
         className="letter-input"
         type="text"
-        onChange={(e) => {
-          setLetter(e.target.value);
-          handleChange(idx, e.target.value);
-        }}
-        disabled={disabled}
+        onChange={(e) => setLetter(e.target.value)}
         style={{ backgroundColor: `${currentStyle}` }}
       />
     </>
@@ -27,9 +28,7 @@ function Letter(props) {
 
 Letter.propTypes = {
   value: PropTypes.string,
-  idx: PropTypes.number,
   disabled: PropTypes.bool,
-  handleChange: PropTypes.func,
   currentStyle: PropTypes.string,
 };
 

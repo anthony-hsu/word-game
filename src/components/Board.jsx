@@ -1,8 +1,13 @@
 import { generate } from "random-words";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Word from "./Word";
 
 function Board() {
+  useEffect(() => {
+    const divBoard = document.getElementById("div-board");
+    divBoard.focus();
+  });
+
   const getInitialWords = () => {
     const _words = [];
     for (let rows = 0; rows < 6; rows += 1) {
@@ -30,14 +35,16 @@ function Board() {
   const initializeNewGame = () => {
     setGameInProgress(true);
     setWords(getInitialWords());
-    setCurrentStyles(getInitialStyles());
     setCurrentRound(1);
+    setCurrentPos(0);
+    setCurrentStyles(getInitialStyles());
     setTargetWord(generate({ minLength: 5, maxLength: 5 }));
   };
 
   // States
   const [words, setWords] = useState(getInitialWords());
   const [currentRound, setCurrentRound] = useState(1);
+  const [currentPos, setCurrentPos] = useState(0);
   const [currentStyles, setCurrentStyles] = useState(getInitialStyles());
   const [gameInProgress, setGameInProgress] = useState(false);
   const [targetWord, setTargetWord] = useState("");
@@ -92,65 +99,74 @@ function Board() {
         setGameInProgress(false);
       }
       setCurrentRound(currentRound + 1);
+      setCurrentPos(0);
     } else {
       for (let i = 0; i < 5; i += 1) {
         _currentStyles[currentRound - 1][i] = validationArray[i] ? "" : "red";
       }
-      console.log(_currentStyles);
       setCurrentStyles(_currentStyles);
     }
   };
 
-  const handleWordChange = (newWord) => {
-    const _words = words;
-    _words[currentRound - 1] = newWord;
-    setWords(_words);
+  const handleKeyDown = (e) => {
+    if (gameInProgress) {
+      const _words = words;
+      if (
+        currentPos < 5 &&
+        e.key.charCodeAt() >= "a".charCodeAt() &&
+        e.key.charCodeAt() <= "z".charCodeAt()
+      ) {
+        // Valid character
+        _words[currentRound - 1][currentPos] = e.key;
+        setWords(_words);
+        setCurrentPos(currentPos + 1);
+      } else if (currentPos > 0 && e.key === "Backspace") {
+        // Delete character
+        _words[currentRound - 1][currentPos - 1] = "";
+        setWords(_words);
+        setCurrentPos(currentPos - 1);
+      }
+    }
   };
 
   return (
-    <>
+    <div id="div-board" onKeyDown={(e) => handleKeyDown(e)} tabIndex={0}>
       {gameInProgress ? (
         <>
           <Word
-            value={words[currentRound - 1]}
+            value={words[0]}
             wordIdx={1}
             currentRound={currentRound}
-            handleWordChange={handleWordChange}
             currentStyles={currentStyles}
           />
           <Word
-            value={words[currentRound - 1]}
+            value={words[1]}
             wordIdx={2}
             currentRound={currentRound}
-            handleWordChange={handleWordChange}
             currentStyles={currentStyles}
           />
           <Word
-            value={words[currentRound - 1]}
+            value={words[2]}
             wordIdx={3}
             currentRound={currentRound}
-            handleWordChange={handleWordChange}
             currentStyles={currentStyles}
           />
           <Word
-            value={words[currentRound - 1]}
+            value={words[3]}
             wordIdx={4}
             currentRound={currentRound}
-            handleWordChange={handleWordChange}
             currentStyles={currentStyles}
           />
           <Word
-            value={words[currentRound - 1]}
+            value={words[4]}
             wordIdx={5}
             currentRound={currentRound}
-            handleWordChange={handleWordChange}
             currentStyles={currentStyles}
           />
           <Word
-            value={words[currentRound - 1]}
+            value={words[5]}
             wordIdx={6}
             currentRound={currentRound}
-            handleWordChange={handleWordChange}
             currentStyles={currentStyles}
           />
           <button
@@ -170,7 +186,7 @@ function Board() {
         New Game
       </button>
       <button onClick={() => console.log(targetWord)}>Show Word</button>
-    </>
+    </div>
   );
 }
 
