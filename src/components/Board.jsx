@@ -112,19 +112,21 @@ function Board() {
     if (gameInProgress) {
       const _words = words;
       if (
-        currentPos < 5 &&
         e.key.charCodeAt() >= "a".charCodeAt() &&
-        e.key.charCodeAt() <= "z".charCodeAt()
+        e.key.charCodeAt() <= "z".charCodeAt() &&
+        currentPos < 5
       ) {
         // Valid character
         _words[currentRound - 1][currentPos] = e.key;
         setWords(_words);
         setCurrentPos(currentPos + 1);
-      } else if (currentPos > 0 && e.key === "Backspace") {
+      } else if (e.key === "Backspace" && currentPos > 0) {
         // Delete character
         _words[currentRound - 1][currentPos - 1] = "";
         setWords(_words);
         setCurrentPos(currentPos - 1);
+      } else if (e.key === "Enter" && currentPos === 5) {
+        handleSubmit();
       }
     }
   };
