@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 function Letter(props) {
   // Props
-  const { value, currentStyle } = props;
+  const { value, currentStyle, gameInProgress } = props;
 
   // States
   const [letter, setLetter] = useState(value);
@@ -17,10 +17,9 @@ function Letter(props) {
       <input
         readOnly
         value={letter}
-        className="letter-input"
+        className={`${currentStyle} ${gameInProgress ? "" : "disabled"} letter-input`}
         type="text"
         onChange={(e) => setLetter(e.target.value)}
-        style={{ backgroundColor: `${currentStyle}` }}
       />
     </>
   );
@@ -30,6 +29,7 @@ Letter.propTypes = {
   value: PropTypes.string,
   disabled: PropTypes.bool,
   currentStyle: PropTypes.string,
+  gameInProgress: PropTypes.bool,
 };
 
 export default Letter;

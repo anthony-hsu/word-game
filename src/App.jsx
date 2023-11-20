@@ -1,10 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Board from "./components/Board";
 
 function App() {
   return (
-    <div>
-      <h1>Word Game</h1>
+    <div className='app'>
       <Board />
     </div>
   );

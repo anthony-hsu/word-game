@@ -3,8 +3,7 @@ import Letter from "./Letter";
 
 function Word(props) {
   // Props
-  const { value, wordIdx, currentRound, currentStyles } =
-    props;
+  const { value, wordIdx, currentRound, currentStyles, gameInProgress } = props;
 
   const idxArr = [...Array(5).keys()];
 
@@ -19,6 +18,7 @@ function Word(props) {
         value={value[idx]}
         disabled={isDisabled(wordIdx)}
         currentStyle={currentStyles[wordIdx - 1][idx]}
+        gameInProgress={gameInProgress}
       />
     );
   };
@@ -31,6 +31,7 @@ Word.propTypes = {
   wordIdx: PropTypes.number,
   currentRound: PropTypes.number,
   currentStyles: PropTypes.array,
+  gameInProgress: PropTypes.bool,
 };
 
 export default Word;
