@@ -1,4 +1,4 @@
-import { generate, wordList } from "random-words";
+import { generate } from "random-words";
 import { useEffect, useState } from "react";
 import Word from "./Word";
 import Button from "react-bootstrap/Button";
@@ -118,9 +118,7 @@ function Board() {
     });
     const _keyboardLetters = keyboardLetters;
     const validationArray = getValidationArray(currentWord);
-    const isWordValid =
-      wordList.includes(currentWordString.toLowerCase()) &&
-      !validationArray.includes(false);
+    const isWordValid = !validationArray.includes(false);
 
     if (isWordValid) {
       for (let i = 0; i < 5; i += 1) {
