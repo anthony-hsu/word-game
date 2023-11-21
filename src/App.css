@@ -36,6 +36,56 @@ body {
   background-color: lightgray;
 }
 
+.invalid {
+  background-color: white;
+  animation-name: flash-red-invalid, shake-invalid;
+  animation-duration: .10s;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+}
+@keyframes flash-red-invalid {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: rgba(100%, 0%, 0%, 50%);
+  }
+}
+@keyframes shake-invalid {
+  0% {}
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
+.invalid-reverse {
+  background-color: white;
+  animation-name: flash-red-invalid-reverse, shake-invalid-reverse;
+  animation-duration: .10s;
+  animation-iteration-count: 2;
+  animation-direction: alternate-reverse;
+}
+@keyframes flash-red-invalid-reverse {
+  from {
+    background-color: rgba(100%, 0%, 0%, 50%);
+  }
+  to {
+    background-color: white;
+  }
+}
+@keyframes shake-invalid-reverse {
+  0% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {}
+}
+
 .disabled {
   opacity: 25%;
 }
@@ -71,7 +121,6 @@ body {
 }
 
 .keyboard-key {
-  
 }
 
 .keyboard-pos-1 {

@@ -1,4 +1,4 @@
-import { generate } from "random-words";
+import { generate, wordList } from "random-words";
 import { useEffect, useState } from "react";
 import Word from "./Word";
 import Button from "react-bootstrap/Button";
@@ -73,7 +73,7 @@ function Board() {
     setCurrentPos(0);
     setCurrentStyles(getInitialStyles());
     setKeyboardLetters(getInitialKeyboardLetters());
-    setTargetWord(capitalize(generate({ minLength: 5, maxLength: 5 })));
+    setTargetWord(generate({ minLength: 5, maxLength: 5 }).toUpperCase());
   };
 
   // States
@@ -118,7 +118,9 @@ function Board() {
     });
     const _keyboardLetters = keyboardLetters;
     const validationArray = getValidationArray(currentWord);
-    const isWordValid = !validationArray.includes(false);
+    const isWordValid =
+      wordList.includes(currentWordString.toLowerCase()) &&
+      !validationArray.includes(false);
 
     if (isWordValid) {
       for (let i = 0; i < 5; i += 1) {
@@ -150,6 +152,12 @@ function Board() {
       setCurrentRound(currentRound + 1);
       setCurrentPos(0);
     } else {
+      for (let i = 0; i < 5; i += 1) {
+        _currentStyles[currentRound - 1][i] =
+          _currentStyles[currentRound - 1][i] === "invalid"
+            ? "invalid-reverse"
+            : "invalid";
+      }
       setCurrentStyles(_currentStyles);
     }
   };
@@ -163,7 +171,7 @@ function Board() {
         currentPos < 5
       ) {
         // Valid character
-        _words[currentRound - 1][currentPos] = capitalize(e.key);
+        _words[currentRound - 1][currentPos] = e.key.toUpperCase();
         setWords(_words);
         setCurrentPos(currentPos + 1);
       } else if (e.key === "Backspace" && currentPos > 0) {
@@ -171,22 +179,10 @@ function Board() {
         _words[currentRound - 1][currentPos - 1] = "";
         setWords(_words);
         setCurrentPos(currentPos - 1);
-      } else if (e.key === "Enter" && currentPos === 5) {
+      } else if (e.key === "Enter") {
         handleSubmit();
       }
     }
-  };
-
-  const capitalize = (lower) => {
-    var upper = "";
-    for (let i = 0; i < lower.length; i += 1) {
-      upper = upper.concat(
-        String.fromCharCode(
-          lower.charCodeAt(i) + ("A".charCodeAt() - "a".charCodeAt())
-        )
-      );
-    }
-    return upper;
   };
 
   return (
