@@ -9,7 +9,7 @@ body {
   font-size: 2.5rem;
   margin: 0.25rem;
   text-align: center;
-  box-shadow: 2px 2px 2px lightgray;
+  box-shadow: 2px 2px 0px lightgray;
   border: 2px;
   border-color: black;
   border-style: solid;
@@ -120,7 +120,23 @@ body {
   grid-template-rows: repeat(3, 50px);
 }
 
+.keyboard-key-container {
+  padding: 2px;
+}
+
 .keyboard-key {
+  height: 100%;
+  border: 1px solid gray;
+  border-radius: 20%;
+  box-shadow: 1px 2px 0px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard-key p {
+  margin: 0;
 }
 
 .keyboard-pos-1 {
