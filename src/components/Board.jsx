@@ -4,6 +4,9 @@ import Word from "./Word";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import Keyboard from "./Keyboard";
+import Switch from "@mui/material/Switch";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { IconButton } from "@mui/material";
 
 function Board() {
   useEffect(() => {
@@ -89,6 +92,8 @@ function Board() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFailure, setShowFailure] = useState(false);
   const [showNewGame, setShowNewGame] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showKeyboard, setShowKeyboard] = useState([false, false]);
 
   const getValidationArray = (currentWord) => {
     const results = currentWord.map((letter) => {
@@ -186,7 +191,12 @@ function Board() {
   return (
     <>
       <div id="div-board" onKeyDown={(e) => handleKeyDown(e)} tabIndex={0}>
-        <h1>Word Game</h1>
+        <div id="div-board-header">
+          <IconButton onClick={() => setShowSettings(true)}>
+            <SettingsIcon fontSize="large" />
+          </IconButton>
+          <h1 className="title">Word Game</h1>
+        </div>
         <div>
           <Word
             value={words[0]}
@@ -237,10 +247,10 @@ function Board() {
         >
           Submit
         </Button>
-        <Keyboard letters={keyboardLetters} />
+        {showKeyboard[1] ? <Keyboard letters={keyboardLetters} /> : <></>}
       </div>
 
-      <Modal show={showNewGame} onHide={() => setShowNewGame(false)}>
+      <Modal show={showNewGame}>
         <Modal.Header closeButton>
           <h3>Welcome!</h3>
         </Modal.Header>
@@ -263,7 +273,7 @@ function Board() {
         <Modal.Header closeButton>
           <h3>Success!</h3>
         </Modal.Header>
-        <Modal.Body>Play again?</Modal.Body>
+        <Modal.Body>{`The word was "${targetWord.toUpperCase()}". Play again?`}</Modal.Body>
         <Modal.Footer>
           <Button
             onClick={() => {
@@ -281,7 +291,7 @@ function Board() {
         <Modal.Header closeButton>
           <h3>Game Over!</h3>
         </Modal.Header>
-        <Modal.Body>{`The word was "${targetWord}". Try again?`}</Modal.Body>
+        <Modal.Body>{`The word was "${targetWord.toUpperCase()}". Try again?`}</Modal.Body>
         <Modal.Footer>
           <Button
             onClick={() => {
@@ -292,6 +302,40 @@ function Board() {
           >
             New Game
           </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showSettings} onHide={() => setShowSettings(false)}>
+        <Modal.Header closeButton>
+          <h3>Settings</h3>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="settings-container">
+            <div className="setting">
+              <div className="setting-name">
+                <p>Show Keyboard</p>
+              </div>
+              <div className="setting-value">
+                <Switch
+                  checked={showKeyboard[0]}
+                  onChange={(e) =>
+                    setShowKeyboard([e.target.checked, showKeyboard[1]])
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() => {
+              setShowKeyboard([showKeyboard[0], showKeyboard[0]]);
+              setShowSettings(false);
+            }}
+          >
+            Save
+          </Button>
+          <Button onClick={() => setShowSettings(false)}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>
