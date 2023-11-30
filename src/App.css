@@ -286,3 +286,26 @@ div:focus {
   top: 0;
   right: 0;
 }
+
+
+/*********** MOBILE - MEDIA QUERIES ***********/ 
+
+@media (max-width: 480px) {
+  .keyboard-container {
+    grid-template-columns: repeat(20, 4.5vw);
+    grid-template-rows: repeat(3, 9vw);
+  }
+  .keyboard-key-container {
+    padding: 1px;
+  }
+  .keyboard-key {
+    height: 100%;
+    border: 1px solid gray;
+    border-radius: 10%;
+    box-shadow: 1px 1px 1px lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
