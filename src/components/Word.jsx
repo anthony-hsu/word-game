@@ -3,9 +3,9 @@ import Letter from "./Letter";
 
 function Word(props) {
   // Props
-  const { value, wordIdx, currentRound, currentStyles, gameInProgress } = props;
+  const { word, wordIdx, currentRound, currentStyles, gameInProgress } = props;
 
-  const idxArr = [...Array(5).keys()];
+  const idxArr = [...Array(word.length).keys()];
 
   const isDisabled = (round) => {
     return round != currentRound;
@@ -15,7 +15,7 @@ function Word(props) {
     return (
       <Letter
         key={idx}
-        value={value[idx]}
+        letter={word[idx]}
         disabled={isDisabled(wordIdx)}
         currentStyle={currentStyles[wordIdx - 1][idx]}
         gameInProgress={gameInProgress}
@@ -27,7 +27,7 @@ function Word(props) {
 }
 
 Word.propTypes = {
-  value: PropTypes.array,
+  word: PropTypes.array,
   wordIdx: PropTypes.number,
   currentRound: PropTypes.number,
   currentStyles: PropTypes.array,

@@ -106,16 +106,22 @@ p {
 }
 
 #div-board {
-  height: 100vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 2rem;
 }
 
-#div-board:focus {
-  outline-width: 0;
+div:focus {
+  outline: none;
+}
+
+#div-board-header {
+  margin: 5vh 0;
+  left: 0;
+  right: 0;
 }
 
 .keyboard-container {
@@ -245,6 +251,7 @@ p {
 }
 
 .settings-container {
+  margin: 0 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -254,7 +261,7 @@ p {
 .setting {
   width: 100%;
   display: grid;
-  grid-template-columns: 10fr 1fr 7fr;
+  grid-template-columns: 10fr 2fr 6fr;
   grid-template-rows: auto;
 }
 
@@ -270,4 +277,12 @@ p {
   align-items: center;
   justify-content: left;
   grid-column: 3 / 4;
+}
+
+.configs {
+  position: absolute;
+  margin-right: 5vh;
+  margin-top: 5vh;
+  top: 0;
+  right: 0;
 }

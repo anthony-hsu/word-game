@@ -3,30 +3,30 @@ import { useEffect, useState } from "react";
 
 function Letter(props) {
   // Props
-  const { value, currentStyle, gameInProgress } = props;
+  const { letter, currentStyle, gameInProgress } = props;
 
   // States
-  const [letter, setLetter] = useState(value);
+  const [letterInput, setLetterInput] = useState(letter);
 
   useEffect(() => {
-    setLetter(value);
-  }, [value]);
+    setLetterInput(letter);
+  }, [letter]);
 
   return (
     <>
       <input
         readOnly
-        value={letter}
+        value={letterInput}
         className={`${currentStyle} ${gameInProgress ? "" : "disabled"} letter-input`}
         type="text"
-        onChange={(e) => setLetter(e.target.value)}
+        onChange={(e) => setLetterInput(e.target.value)}
       />
     </>
   );
 }
 
 Letter.propTypes = {
-  value: PropTypes.string,
+  letter: PropTypes.string,
   disabled: PropTypes.bool,
   currentStyle: PropTypes.string,
   gameInProgress: PropTypes.bool,
