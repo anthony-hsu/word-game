@@ -1,7 +1,20 @@
 import PropTypes from "prop-types";
 
 function Keyboard(props) {
-  const { letters } = props;
+  const { letters, setLetters } = props;
+
+  const handleTouchStart = (key) => {
+    const _letters = letters;
+    _letters[key][1] = "green";
+    setLetters(_letters);
+  };
+
+  const handleTouchEnd = (key) => {
+    const _letters = letters;
+    _letters[key][1] = "yellow";
+    setLetters(_letters);
+  };
+
   const showLetters = (key) => {
     return (
       <div
@@ -11,8 +24,8 @@ function Keyboard(props) {
       >
         <div
           className={`keyboard-key ${letters[key][1]}`}
-          onTouchStart={() => console.log("Touch Activated")}
-          onTouchEnd={() => console.log("Touch Ended")}
+          onTouchStart={() => handleTouchStart(key)}
+          onTouchEnd={() => handleTouchEnd(key)}
         >
           <p>{key}</p>
         </div>
@@ -28,6 +41,7 @@ function Keyboard(props) {
 
 Keyboard.propTypes = {
   letters: PropTypes.object,
+  setLetters: PropTypes.func,
 };
 
 export default Keyboard;
