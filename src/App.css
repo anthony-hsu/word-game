@@ -249,6 +249,12 @@ div:focus {
   grid-row: 3;
   grid-column: 15/ 17;
 }
+.keyboard-pos-enter {
+  display: none;
+}
+.keyboard-pos-delete {
+  display: none;
+}
 
 .settings-container {
   margin: 0 5rem;
@@ -308,4 +314,47 @@ div:focus {
     justify-content: center;
     align-items: center;
   }
+  .keyboard-pos-20 {
+    grid-row: 3;
+    grid-column: 4 / 6;
+  }
+  .keyboard-pos-21 {
+    grid-row: 3;
+    grid-column: 6 / 8;
+  }
+  .keyboard-pos-22 {
+    grid-row: 3;
+    grid-column: 8 / 10;
+  }
+  .keyboard-pos-23 {
+    grid-row: 3;
+    grid-column: 10 / 12;
+  }
+  .keyboard-pos-24 {
+    grid-row: 3;
+    grid-column: 12 / 14;
+  }
+  .keyboard-pos-25 {
+    grid-row: 3;
+    grid-column: 14 / 16;
+  }
+  .keyboard-pos-26 {
+    grid-row: 3;
+    grid-column: 16 / 18 ;
+  }
+  .keyboard-pos-enter {
+    display: block;
+    grid-row: 3;
+    grid-column: 1 / 4;
+    background-color: lightgray;
+    font-weight: bold;
+  }
+  .keyboard-pos-delete {
+    display: block;
+    grid-row: 3;
+    grid-column: 18 / 21;
+    background-color: lightgray;
+    font-weight: bold;
+  }
+
 }
