@@ -1,26 +1,11 @@
 import PropTypes from "prop-types";
 
 function Keyboard(props) {
-  const { letters, setLetters } = props;
-
-  const handleTouchStart = (key) => {
-    const _letters = letters;
-    _letters[key][1] = "green";
-    setLetters(_letters);
-  };
-
-  const handleTouchEnd = (key) => {
-    const _letters = letters;
-    _letters[key][1] = "yellow";
-    setLetters(_letters);
-  };
+  const { letters } = props;
 
   const showLetters = (key) => {
     return (
       <div
-        onMouseDown={() => handleTouchStart(key)}
-        onMouseUp={() => handleTouchEnd(key)}
-
         key={`key-${key}`}
         id={`key-${key}`}
         className={`keyboard-key-container keyboard-pos-${letters[key][0]}`}
