@@ -1,18 +1,17 @@
 import PropTypes from "prop-types";
 
 function Keyboard(props) {
-  const { letters } = props;
+  const { letters, handleKeyTap } = props;
 
   const showLetters = (key) => {
     return (
       <div
         key={`key-${key}`}
-        id={`key-${key}`}
-        className={`keyboard-key-container keyboard-pos-${letters[key][0]}`}
+        id={key}
+        className={`keyboard-pos-${letters[key][0]} keyboard-key ${letters[key][1]}`}
+        onClick={(e) => handleKeyTap(e)}
       >
-        <div className={`keyboard-key ${letters[key][1]}`}>
-          <p>{key}</p>
-        </div>
+        {key}
       </div>
     );
   };
@@ -25,7 +24,7 @@ function Keyboard(props) {
 
 Keyboard.propTypes = {
   letters: PropTypes.object,
-  setLetters: PropTypes.func,
+  handleKeyTap: PropTypes.func,
 };
 
 export default Keyboard;

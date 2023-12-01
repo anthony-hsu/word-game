@@ -207,6 +207,30 @@ function Board() {
     }
   };
 
+  const handleKeyTap = (e) => {
+    if (gameInProgress) {
+      const _words = words;
+      if (e.target.id === "Del" && currentPos > 0) {
+        // Delete character
+        _words[currentRound - 1][currentPos - 1] = "";
+        setWords(_words);
+        setCurrentPos(currentPos - 1);
+      } else if (e.target.id === "Enter") {
+        handleSubmit();
+      } else if (
+        e.target.id.length == 1 &&
+        e.target.id.charCodeAt() >= "A".charCodeAt() &&
+        e.target.id.charCodeAt() <= "Z".charCodeAt() &&
+        currentPos < wordLength[1]
+      ) {
+        // Valid character
+        _words[currentRound - 1][currentPos] = e.target.id;
+        setWords(_words);
+        setCurrentPos(currentPos + 1);
+      }
+    }
+  }
+
   const showWords = (word, idx) => {
     return (
       <Word
@@ -233,16 +257,10 @@ function Board() {
         </div>
         <div id="div-board">
           <div>{words.map((word, idx) => showWords(word, idx))}</div>
-          {/* <Button
-            className={`${gameInProgress ? "" : "hidden"}`}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button> */}
           {showKeyboard[1] ? (
             <Keyboard
               letters={keyboardLetters}
-              setLetters={setKeyboardLetters}
+              handleKeyTap={handleKeyTap}
             />
           ) : (
             <></>
