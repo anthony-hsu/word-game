@@ -18,9 +18,9 @@ function Keyboard(props) {
   const showLetters = (key) => {
     return (
       <div
-        onClick={() => handleTouchStart(key)}
+        onMouseDown={() => handleTouchStart(key)}
         onMouseUp={() => handleTouchEnd(key)}
-        
+
         key={`key-${key}`}
         id={`key-${key}`}
         className={`keyboard-key-container keyboard-pos-${letters[key][0]}`}

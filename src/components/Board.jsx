@@ -110,6 +110,10 @@ function Board() {
   const [showSettings, setShowSettings] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState([true, true]);
 
+  useEffect(() => {
+    setKeyboardLetters(keyboardLetters);
+  }, [keyboardLetters]);
+
   const getValidationArray = (currentWord) => {
     const results = currentWord.map((letter) => {
       // Validate for:
