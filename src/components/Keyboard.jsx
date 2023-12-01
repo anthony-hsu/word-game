@@ -9,7 +9,11 @@ function Keyboard(props) {
         id={`key-${key}`}
         className={`keyboard-key-container keyboard-pos-${letters[key][0]}`}
       >
-        <div className={`keyboard-key ${letters[key][1]}`}>
+        <div
+          className={`keyboard-key ${letters[key][1]}`}
+          onTouchStart={() => console.log("Touch Activated")}
+          onTouchEnd={() => console.log("Touch Ended")}
+        >
           <p>{key}</p>
         </div>
       </div>
