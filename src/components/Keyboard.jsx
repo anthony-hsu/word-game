@@ -24,8 +24,8 @@ function Keyboard(props) {
       >
         <div
           className={`keyboard-key ${letters[key][1]}`}
-          onTouchStart={() => handleTouchStart(key)}
-          onTouchEnd={() => handleTouchEnd(key)}
+          onClick={() => handleTouchStart(key)}
+          onMouseUp={() => handleTouchEnd(key)}
         >
           <p>{key}</p>
         </div>
