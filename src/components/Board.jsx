@@ -329,7 +329,7 @@ function Board() {
         </Modal.Header>
         <Modal.Body>
           <div className="settings-container">
-            <div className="setting">
+            <div className="setting" id="show-keyboard-setting">
               <div className="setting-name">
                 <p>Show Keyboard</p>
               </div>
