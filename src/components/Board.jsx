@@ -248,12 +248,12 @@ function Board() {
     <>
       <div id="div-page" onKeyDown={(e) => handleKeyDown(e)} tabIndex={0}>
         <div id="div-board-header">
+          <h1 className="title">Word Game</h1>
           <div className="configs">
             <IconButton onClick={() => setShowSettings(true)}>
               <SettingsIcon fontSize="large" />
             </IconButton>
           </div>
-          <h1 className="title">Word Game</h1>
         </div>
         <div id="div-board">
           <div>{words.map((word, idx) => showWords(word, idx))}</div>
