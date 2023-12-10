@@ -1,5 +1,5 @@
 import { generate } from "random-words";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Word from "./Word";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
@@ -9,13 +9,14 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton, Input } from "@mui/material";
 
 function Board() {
+  const pageRef = useRef(null);
+
   // "Constant States"
   const [maxTries, setMaxTries] = useState([6, 6]);
   const [wordLength, setWordLength] = useState([5, 5]);
 
   useEffect(() => {
-    const divBoard = document.getElementById("div-page");
-    divBoard.focus();
+    pageRef.current.focus();
   });
 
   const getInitialKeyboardLetters = () => {
@@ -246,7 +247,7 @@ function Board() {
 
   return (
     <>
-      <div id="div-page" onKeyDown={(e) => handleKeyDown(e)} tabIndex={0}>
+      <div id="div-page" ref={pageRef} onKeyDown={(e) => handleKeyDown(e)} tabIndex={0}>
         <div id="div-board-header">
           <h1 className="title">Word Game</h1>
           <div className="configs">
