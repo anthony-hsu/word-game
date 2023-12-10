@@ -231,7 +231,7 @@ function Board() {
       }
 
       // Trigger haptics on mobile
-      navigator.vibrate();
+      navigator.vibrate(100);
     }
   }
 
