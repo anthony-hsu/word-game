@@ -229,6 +229,9 @@ function Board() {
         setWords(_words);
         setCurrentPos(currentPos + 1);
       }
+
+      // Trigger haptics on mobile
+      navigator.vibrate();
     }
   }
 
